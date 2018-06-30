@@ -10,9 +10,13 @@
           <div class="form-group">
            <%= f.password_field :password, id: :password, class: "form-control input-lg",  placeholder: 'Password' %>
           </div>
-       <%= f.submit "Log me in!", class: "btn btn-lg btn-primary btn-block" %>
-             </fieldset>
-<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+          <%= f.label :remember_me, class: "custom-control custom-checkbox my-1 mr-sm-2" do %>
+            <%= f.check_box :remember_me, class: "custom-control-input" %>
+            <span class="custom-control-label">Remember me </span>
+          <% end %>
+          <%= f.submit "Log me in!", class: "btn btn-lg btn-primary btn-block" %>
+        </fieldset>
+        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
       <% end %>
     </div>
   </div>
