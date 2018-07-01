@@ -1,17 +1,13 @@
 <% provide(:title, 'All users') %>
-<div>
-  <h4 class="text-left">Users</h4>
-</div>
 <%= will_paginate(@users, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 <ul class="list-group list-group-flush">
   <% @users.each do |user| %>
     <li class="list-group-item">
       <%= link_to user.name, user_path(user) %>
       <% if current_user.admin? && !current_user?(user) %>
-        | <%= link_to "delete", user, method: :delete, 
+        | <%= link_to "delete", user, method: :delete,
                                       data: { confirm: "Delete the user?" }%>
       <% end %>
     </li>
   <% end %>
 </ul>
-<%= will_paginate(@users, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
