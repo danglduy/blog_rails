@@ -1,14 +1,20 @@
 <ul class="list-group">
+  <% if logged_in? %>
+    <li class="list-group-item">
+      <%= render 'shared/comment_form'%>
+    </li>
+  <% else %>
+    <li class="list-group-item list-group-item-warning">
+      <%= link_to "Login to comment!", login_path %>
+    </li>
+  <% end %>
 
-  <li class="list-group-item">
-    <%= render 'shared/comment_form'%>
-  </li>
   <% @comments.each do |comment| %>
     <li class="list-group-item">
       <%= link_to comment.user.name, user_path(comment.user) %>&nbsp;&gt;&nbsp;<%= comment.content %><span class="timestamp">
         Commented on <%= time_ago_in_words(comment.created_at) %> ago.
       </span>
-      <% if current_user.admin? || current_user?(comment.user) || current_user?(comment.post.user) then %>
+      <% if logged_in? && current_user.admin? || current_user?(comment.user) || current_user?(comment.post.user) then %>
         | <%= link_to "delete", post_comment_url(comment.post, comment), method: :delete,
           data: { confirm: "Delete the comment?" }%>
       <% end %>
