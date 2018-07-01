@@ -1,10 +1,10 @@
 <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <% if logged_in? %>
-              <%= link_to "Write a post", new_post_path, class:"btn btn-secondary" %>
-            <% end %>
+            <%= link_to "Write a post", new_post_path, class:"btn btn-secondary" %>
+            <%= link_to "Newest posts", posts_path, class:"btn btn-secondary" %>
           </div>
+
           <div class="col-4 text-center">
 						<%= link_to "Awesome Blog", root_path, class: "blog-header-logo text-dark" %>
           </div>

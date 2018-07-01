@@ -25,7 +25,7 @@ users = User.order(:created_at).take(6)
     users.each { |user| user.posts.create!(title: title, content: content)  }
 end
 users = User.order(:created_at).take(6)
-posts = Post.all
+posts = Post.where(user_id: 1)
 50.times do
   content = Faker::Lorem.sentence(2)
   users.each do |user|
