@@ -24,6 +24,16 @@ users = User.order(:created_at).take(6)
     content = Faker::Lorem.paragraphs(4).map{|pr| "<p>#{pr}</p>"}.join
     users.each { |user| user.posts.create!(title: title, content: content)  }
 end
+users = User.order(:created_at).take(6)
+posts = Post.all
+50.times do
+  content = Faker::Lorem.sentence(2)
+  users.each do |user|
+    posts.each do |post|
+      user.comments.create!(content: content, post_id: post.id)
+    end
+  end
+end
 
 # Following relationships
 users = User.all

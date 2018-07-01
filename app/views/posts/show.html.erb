@@ -3,3 +3,10 @@
 
 <p>Written at <span title="<%= Time.zone.at(@post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>"><%= time_ago_in_words(@post.created_at) %> ago</span>, by <%= link_to @post.user.name, user_path(@post.user) %></p>
 <%= @post.content.html_safe %>
+
+<%= will_paginate(@comments, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+<div class="comments">
+  <ol>
+    <%= render @comments %>
+  </ol>
+</div>
