@@ -8,6 +8,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
     @comments = @post.comments.paginate(page: params[:page], per_page: 20)
+    @comment = @post.comments.build(user_id: current_user.id) if logged_in?
   end
 
   def new
@@ -23,10 +24,11 @@ class PostsController < ApplicationController
       messages = ""
       @post.errors.each do |key, value|
         message = "#{key}" + ": " + "#{value}" unless value == nil
-        unless message == nil then messages = "#{messages}" + "#{message}. " end
+        unless message == nil then messages = "#{messages}" + "#{message}. "
+        end
       end
-        flash[:danger] = messages unless messages == ""
-        redirect_to new_post_path
+      flash[:danger] = messages unless messages == ""
+      redirect_to new_post_path
     end
   end
 
