@@ -1,20 +1,31 @@
 <% provide(:title, @user.name) %>
-<h1>
-  <%= @user.name %>
-</h1>
 
-<section class="stats">
-  <%= render 'shared/stats' %>
-</section>
+<div class="col-md-4">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= @user.name %></h5>
+      <%= render 'follow_form' if logged_in? %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <% if @user.posts.any? %>
+          <span class="badge badge-primary">
+            <%= @user.posts.count %>
+          </span> Posts
+        <% end %>
+      </li>
+      <li class="list-group-item"><%= render 'shared/stats' %></li>
+    </ul>
+  </div>
 
+</div>
 <div class="col-md-8">
-  <%= render 'follow_form' if logged_in? %>
   <% if @user.posts.any? %>
-    <h3>Posts (<%= @user.posts.count %>)</h3>
-    <%= will_paginate @posts,
-      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
     <ul class="list-group list-group-flush">
       <%= render @posts %>
     </ul>
+    <br>
+    <%= will_paginate @posts,
+      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
   <% end %>
 </div>

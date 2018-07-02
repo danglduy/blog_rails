@@ -1,6 +1,4 @@
 <% provide(:title, 'All users') %>
-<%= will_paginate(@users,
-                  renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
 <ul class="list-group list-group-flush">
   <% @users.each do |user| %>
     <li class="list-group-item">
@@ -8,7 +6,11 @@
       <% if current_user.admin? && !current_user?(user) %>
         | <%= link_to "delete", user, method: :delete,
           data: { confirm: "Delete the user?" }%>
+
       <% end %>
     </li>
   <% end %>
+  <%= will_paginate(@users,
+                    renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+
 </ul>
