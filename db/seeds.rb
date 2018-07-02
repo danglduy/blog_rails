@@ -30,7 +30,7 @@ posts = Post.where(user_id: 1)
   content = Faker::Lorem.sentence(2)
   users.each do |user|
     posts.each do |post|
-      user.comments.create!(content: content, post_id: post.id)
+      post.comments.create!(content: content, user_id: user.id)
     end
   end
 end
