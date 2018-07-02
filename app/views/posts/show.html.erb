@@ -1,12 +1,18 @@
 <% provide(:title, @post.title) %>
-<h4><%= @post.title %></h4>
+<h4>
+  <%= @post.title %>
+</h4>
 
-<p>Written at <span title="<%= Time.zone.at(@post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>"><%= time_ago_in_words(@post.created_at) %> ago</span>, by <%= link_to @post.user.name, user_path(@post.user) %></p>
+<p>Written at
+<span title="<%= Time.zone.at(@post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>">
+  <%= time_ago_in_words(@post.created_at) %> ago
+</span>, by <%= link_to @post.user.name, user_path(@post.user) %></p>
 <%= @post.content.html_safe %>
 <div class="col-md-8">
   <% if @post.comments.any? %>
     <h3>Comments (<%= @post.comments.count %>)</h3>
-    <%= will_paginate @comments, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
-      	<%= render 'comments/comments' %>
+    <%= will_paginate @comments,
+      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    <%= render 'comments/comments' %>
   <% end %>
 </div>

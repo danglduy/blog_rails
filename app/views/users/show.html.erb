@@ -11,7 +11,8 @@
   <%= render 'follow_form' if logged_in? %>
   <% if @user.posts.any? %>
     <h3>Posts (<%= @user.posts.count %>)</h3>
-    <%= will_paginate @posts, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    <%= will_paginate @posts,
+      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
     <ul class="list-group list-group-flush">
       <%= render @posts %>
     </ul>
