@@ -15,14 +15,14 @@ class CommentsController < ApplicationController
         end
       end
         flash[:danger] = messages unless messages == ""
-        redirect_to post_path(@comment.post)
+        redirect_to post_path(@comment.commentable)
     end
   end
 
 
   def destroy
     comment = Comment.find_by(id: params[:id])
-    post = comment.post
+    post = comment.commentable
     comment.destroy
     flash[:success] = "Comment deleted"
     redirect_to post_url(post)
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
   def correct_user
     @comment = Comment.find_by(id: params[:id])
     @commentuser = @comment.user
-    @postuser = @comment.post.user
+    @postuser = @comment.commentable.user
     unless current_user == @commentuser || current_user == @postuser || current_user.admin? then
       redirect_to(root_url)
     end
