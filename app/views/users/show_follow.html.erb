@@ -1,13 +1,35 @@
 <% provide(:title, @title) %>
-<section class="stats">
-  <%= render 'shared/stats' %>
-</section>
-<%= will_paginate(@users,
-                  renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+<div class="col-md-3">
+   <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= @user.name %></h5>
+        <%= render 'follow_form' if logged_in? %>
+      </div>
+      <ul class="list-group list-group-flush">
+       <% if @user.posts.any? %>
+         <li class="list-group-item">
+            <span class="badge badge-primary">
+              <%= @user.posts.count %>
+            </span> Posts
+         </li>
+       <% end %>
+        <li class="list-group-item"><%= render 'shared/stats' %></li>
+      </ul>
+   </div>
+  </div>
+<div class="col-md-9">
 <ul class="list-group list-group-flush">
   <% @users.each do |user| %>
     <li class="list-group-item">
       <%= link_to user.name, user_path(user) %>
+      <% if current_user.admin? && !current_user?(user) %>
+        | <%= link_to "delete", user, method: :delete,
+          data: { confirm: "Delete the user?" }%>
+
+      <% end %>
     </li>
   <% end %>
+  <%= will_paginate(@users,
+                    renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer)%>
 </ul>
+</div>

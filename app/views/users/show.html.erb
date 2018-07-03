@@ -1,25 +1,24 @@
 <% provide(:title, @user.name) %>
 
-<div class="col-md-4">
-  <div class="card" style="width: 18rem;">
+<div class="col-md-3">
+  <div class="card">
     <div class="card-body">
       <h5 class="card-title"><%= @user.name %></h5>
       <%= render 'follow_form' if logged_in? %>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <% if @user.posts.any? %>
+      <% if @user.posts.any? %>
+        <li class="list-group-item">
           <span class="badge badge-primary">
             <%= @user.posts.count %>
           </span> Posts
-        <% end %>
-      </li>
+        </li>
+      <% end %>
       <li class="list-group-item"><%= render 'shared/stats' %></li>
     </ul>
   </div>
-
 </div>
-<div class="col-md-8">
+<div class="col-md-9">
   <% if @user.posts.any? %>
     <ul class="list-group list-group-flush">
       <%= render @posts %>
