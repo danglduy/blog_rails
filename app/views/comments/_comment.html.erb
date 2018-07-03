@@ -1,0 +1,32 @@
+<li class="list-group-item">
+  <%= link_to comment.user.name, user_path(comment.user) %>
+  &nbsp;&gt;&nbsp;
+  <%= comment.content %>
+  <span class="timestamp">
+    Commented on <%= time_ago_in_words(comment.created_at) %> ago.
+  </span>
+
+  <% if logged_in? && current_user.admin? || current_user?(comment.user) || current_user?(comment.commentable.user) then %>
+    | <%= link_to "delete",
+      comment_url(comment),
+      method: :delete,
+      data: { confirm: "Delete the comment?" }%>
+  <% end %>
+
+  <% if logged_in? %>
+    <%= form_for [comment, Comment.new] do |f| %>
+      <div class="form-row p-2">
+        <%= f.text_area :content, placeholder: "Add a Reply", class: "form-control" %>
+      </div>
+      <div class="form-row p-2">
+        <%= f.submit "Reply", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if comment.comments.any? %>
+    <ul class="list-group">
+      <%= render comment.comments %>
+    </ul>
+  <% end %>
+</li>

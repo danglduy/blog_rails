@@ -16,9 +16,16 @@
     </li>
   <% end %>
   <% if @post.comments.any? %>
-    <%= render 'comments/comments' %>
-    <%= will_paginate @comments,
-      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
-      %>
+    <div class="row">
+      <div class="col-md-12 m-3">
+        <%= pluralize(@post.comments.count, 'comment') unless @post.comments.count == 0 %>
+      </div>
+      <ul class="list-group col-md-12 pl-3">
+          <%= render partial: 'comments/comment', collection: @comments %>
+          <%= will_paginate @comments,
+            renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+            %>
+      </ul>
+    </div>
   <% end %>
 </div>

@@ -1,13 +1,13 @@
 class CommentsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user, only: [:destroy]
+  before_action :find_commentable
 
   def create
-    post = Post.find_by(id: params[:post_id])
-    @comment = post.comments.build(comment_params)
+    @comment = @commentable.comments.build(comment_params)
     if @comment.save
-      flash[:success] = "Comment created!"
-      redirect_to post_path(post)
+      flash[:success] = "Your comment was successfully posted!"
+      redirect_back(fallback_location: root_path)
     else
       messages = ""
       @comment.errors.each do |key, value|
@@ -16,16 +16,15 @@ class CommentsController < ApplicationController
         end
       end
         flash[:danger] = messages unless messages == ""
-        redirect_to post_path(@comment.commentable)
+        redirect_back(fallback_location: root_path)
     end
   end
 
   def destroy
     comment = Comment.find_by(id: params[:id])
-    post = comment.commentable
     comment.destroy
     flash[:success] = "Comment deleted"
-    redirect_to post_url(post)
+    redirect_back(fallback_location: root_path)
   end
 
   private
@@ -41,5 +40,10 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content).merge(user_id: current_user.id)
+  end
+
+  def find_commentable
+    @commentable = Comment.find_by(id: params[:comment_id]) if params[:comment_id]
+    @commentable = Post.find_by(id: params[:post_id]) if params[:post_id]
   end
 end
