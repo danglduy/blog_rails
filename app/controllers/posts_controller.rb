@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
-    @comments = @post.comments.paginate(page: params[:page], per_page: 20)
+    @comments = @post.comments.paginate(page: params[:page], per_page: 10)
     @comment = @post.comments.build(user_id: current_user.id) if logged_in?
   end
 

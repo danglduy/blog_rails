@@ -14,12 +14,22 @@
 <div class="col-md-11">
   <%= @post.content.html_safe %>
 </div>
-<div class="col-md-2"></div>
-<div class="col-md-8">
+<div class="col-md-1"></div>
+<div class="col-md-11">
+  <% if logged_in? %>
+    <li class="list-group-item">
+      <%= render 'shared/comment_form'%>
+    </li>
+  <% else %>
+    <li class="list-group-item list-group-item-warning">
+      <%= link_to "Login to comment!", login_path %>
+    </li>
+  <% end %>
   <% if @post.comments.any? %>
-    <h3>Comments (<%= @post.comments.count %>)</h3>
-    <%= will_paginate @comments,
-      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
     <%= render 'comments/comments' %>
+    <%= will_paginate @comments,
+      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+    %>
+
   <% end %>
 </div>

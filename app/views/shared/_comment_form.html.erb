@@ -1,7 +1,10 @@
 <%= form_for(@comment, url: post_comments_path(@post)) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= f.text_area :content,
-    placeholder: "Comment here...",
+  <div class="form-row mb-3"><%= f.text_area :content,
+    placeholder: "What do you think?",
     class: "form-control" %>
-  <%= f.submit "Post", class: "btn btn-primary" %>
+  </div>
+  <div class="form-row">
+    <%= f.submit "Post", class: "btn btn-primary" %>
+  </div>
 <% end %>

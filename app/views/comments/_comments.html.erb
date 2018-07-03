@@ -1,14 +1,8 @@
-<ul class="list-group">
-  <% if logged_in? %>
-    <li class="list-group-item">
-      <%= render 'shared/comment_form'%>
-    </li>
-  <% else %>
-    <li class="list-group-item list-group-item-warning">
-      <%= link_to "Login to comment!", login_path %>
-    </li>
-  <% end %>
-
+<div class="row">
+  <div class="col-md-12 m-3">
+    <%= @post.comments.count %> comments
+  </div>
+<ul class="list-group col-md-12 pl-3">
   <% @comments.each do |comment| %>
     <li class="list-group-item">
       <%= link_to comment.user.name, user_path(comment.user) %>
@@ -26,3 +20,4 @@
     </li>
   <% end %>
 </ul>
+</div>
