@@ -2,15 +2,16 @@
   <%= link_to comment.user.name, user_path(comment.user) %>
   &nbsp;&gt;&nbsp;
   <%= comment.content %>
-  <span class="timestamp">
+  <span class="small">
     Commented on <%= time_ago_in_words(comment.created_at) %> ago.
   </span>
 
   <% if logged_in? && current_user.admin? || current_user?(comment.user) || current_user?(comment.commentable.user) then %>
-    | <%= link_to "delete",
+    <%= link_to "delete",
       comment_url(comment),
       method: :delete,
-      data: { confirm: "Delete the comment?" }%>
+      data: { confirm: "Delete the comment?" },
+      class: "btn btn-outline-danger btn-sm" %>
   <% end %>
   <% if comment.commentable_type == "Post" %>
     <% if logged_in? %>

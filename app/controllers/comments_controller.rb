@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.build(comment_params)
 
-    if @comment.commentable.commentable_type != "Comment"
+    if @comment.commentable_type == "Post" || @comment.commentable.commentable_type != "Comment"
       if @comment.save
         flash[:success] = "Your comment was successfully posted!"
         redirect_back(fallback_location: root_path)
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(id: params[:id])
     @commentuser = @comment.user
     @postuser = @comment.commentable.user
-    unless current_user == @commentuser || current_user == @postuser || current_user.admin? then
+    unless (current_user == @commentuser) || (current_user == @postuser) || current_user.admin? then
       redirect_to(root_url)
     end
   end

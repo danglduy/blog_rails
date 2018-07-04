@@ -1,16 +1,24 @@
 <% provide(:title, @post.title) %>
 <div class="col-md-8 mx-auto">
-  <h4>
-    <%= @post.title %>
-  </h4>
+  <div class="row">
+    <div class="col-md-11">
+      <h4><%= @post.title %></h4>
+    </div>
+    <div class="col-md-1">
+      <%=link_to "Edit post", edit_post_path(@post),
+        class: "btn btn-outline-secondary btn-sm" %>
+    </div>
+  </div>
   <p>Written at
   <span title="<%= Time.zone.at(@post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>">
     <%= time_ago_in_words(@post.created_at) %> ago
   </span>, by <%= link_to @post.user.name, user_path(@post.user) %></p>
   <%= @post.content.html_safe %>
-  <% if logged_in? %>
+  <% if logged_in?
+       if @post.user.following.include?(current_user)%>
       <%= render 'shared/comment_form'%>
-  <% else %>
+      <% end
+  else %>
     <li class="list-group-item list-group-item-warning">
       <%= link_to "Login to comment!", login_path %>
     </li>

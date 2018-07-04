@@ -56,7 +56,7 @@ class User < ApplicationRecord
   end
 
   def send_activation_email
-    User.account_activation(self).deliver_now
+    UserMailer.account_activation(self).deliver_now
   end
 
   def create_reset_digest
@@ -94,4 +94,11 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+	def feed
+		following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Post.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+	end
 end

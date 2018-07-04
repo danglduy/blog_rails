@@ -129,3 +129,10 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+.btn-group-xs > .btn, .btn-xs {
+  padding  : .25rem .4rem;
+  font-size  : .8rem;
+  line-height  : .5;
+  border-radius : .2rem;
+}
