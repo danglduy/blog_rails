@@ -12,21 +12,24 @@
       method: :delete,
       data: { confirm: "Delete the comment?" }%>
   <% end %>
-
-  <% if logged_in? %>
-    <%= form_for [comment, Comment.new] do |f| %>
-      <div class="form-row p-2">
-        <%= f.text_area :content, placeholder: "Add a Reply", class: "form-control" %>
-      </div>
-      <div class="form-row p-2">
-        <%= f.submit "Reply", class: "btn btn-primary" %>
-      </div>
+  <% if comment.commentable_type == "Post" %>
+    <% if logged_in? %>
+      <%= form_for [comment, Comment.new] do |f| %>
+        <div class="form-row p-2">
+          <%= f.text_area :content,
+            placeholder: "Add a Reply",
+            class: "form-control" %>
+        </div>
+        <div class="form-row p-2">
+          <%= f.submit "Reply", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    <% end %>
+    <% if comment.comments.any? %>
+      <ul class="list-group pt-3">
+        <%= render comment.comments %>
+      </ul>
     <% end %>
   <% end %>
-
-  <% if comment.comments.any? %>
-    <ul class="list-group">
-      <%= render comment.comments %>
-    </ul>
-  <% end %>
 </li>
+
