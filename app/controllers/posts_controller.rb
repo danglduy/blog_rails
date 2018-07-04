@@ -33,6 +33,26 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @post.update_attributes(post_params)
+      flash[:success] = "Post updated"
+      # redirect_to user_path(current_user)
+      redirect_to post_path(@post)
+    else
+      messages = ""
+      @post.errors.each do |key, value|
+        message = "#{key}" + ": " + "#{value}" unless value == nil
+        unless message == nil then messages = "#{messages}" + "#{message}. "
+        end
+      end
+      flash[:danger] = messages unless messages == ""
+      redirect_to post_path(@post)
+    end
+  end
+
   private
 
   def find_post
