@@ -8,7 +8,7 @@ Written at
 <% if @postpage == nil %>
 , by <%= link_to post.user.name, user_path(post.user) %>
 <% end %>
-  <% if logged_in? &&  current_user.admin? || current_user?(post.user) %>
+  <% if logged_in? && current_user.admin? || current_user?(post.user) %>
     | <%= link_to "delete", post, method: :delete,
       data: { confirm: "Delete the post?" }%>
   <% end %>

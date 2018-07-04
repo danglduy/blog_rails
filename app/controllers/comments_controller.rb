@@ -5,21 +5,26 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.build(comment_params)
-    if @comment.save
-      flash[:success] = "Your comment was successfully posted!"
-      redirect_back(fallback_location: root_path)
-    else
-      messages = ""
-      @comment.errors.each do |key, value|
-        message = "#{key}" + ": " + "#{value}" unless value == nil
-        unless message == nil then messages = "#{messages}" + "#{message}. "
+
+    if @comment.commentable.commentable_type != "Comment"
+      if @comment.save
+        flash[:success] = "Your comment was successfully posted!"
+        redirect_back(fallback_location: root_path)
+      else
+        messages = ""
+        @comment.errors.each do |key, value|
+          message = "#{key}" + ": " + "#{value}" unless value == nil
+          unless message == nil then messages = "#{messages}" + "#{message}. "
+          end
         end
-      end
         flash[:danger] = messages unless messages == ""
         redirect_back(fallback_location: root_path)
+      end
+    else
+      flash[:danger] = "Nested comment is not permitted!"
+      redirect_back(fallback_location: root_path)
     end
   end
-
   def destroy
     comment = Comment.find_by(id: params[:id])
     comment.destroy
