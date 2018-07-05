@@ -5,7 +5,12 @@
   <span class="small">
     Commented on <%= time_ago_in_words(comment.created_at) %> ago.
   </span>
+  <% if logged_in? && comment.commentable_type == "Post" %>
+    <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#comment-<%= comment.id %>-form" aria-expanded="false" aria-controls="collapseExample">
+      Reply
+    </button>
 
+  <% end %>
   <% if logged_in? && current_user.admin? || current_user?(comment.user) || current_user?(comment.commentable.user) then %>
     <%= link_to "delete",
       comment_url(comment),
@@ -16,14 +21,15 @@
   <% end %>
   <% if comment.commentable_type == "Post" %>
     <% if logged_in? %>
-      <%= form_for [comment, Comment.new] do |f| %>
+
+      <%= form_for [comment, Comment.new], html: { id: "comment-#{comment.id}-form", class: "collapse" } do |f| %>
         <div class="form-row p-2">
           <%= f.text_area :content,
             placeholder: "Add a Reply",
             class: "form-control" %>
         </div>
         <div class="form-row p-2">
-          <%= f.submit "Reply", class: "btn btn-primary" %>
+          <%= f.submit "Submit reply", class: "btn btn-primary" %>
         </div>
       <% end %>
     <% end %>
