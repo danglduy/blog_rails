@@ -9,8 +9,13 @@ class CommentsController < ApplicationController
 
     if @comment.commentable_type == "Post" || @comment.commentable.commentable_type != "Comment"
       if @comment.save
-        flash[:success] = "Your comment was successfully posted!"
-        redirect_back(fallback_location: root_path)
+        respond_to do |format|
+          format.html {
+            flash[:success] = "Your comment was successfully posted!"
+            redirect_back(fallback_location: root_path)
+          }
+          format.js
+        end
       else
         messages = ""
         @comment.errors.each do |key, value|

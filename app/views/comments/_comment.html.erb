@@ -3,10 +3,10 @@
   &nbsp;&gt;&nbsp;
   <%= comment.content %>
   <span class="small">
-    Commented on <%= time_ago_in_words(comment.created_at) %> ago.
+    <%= time_ago_in_words(comment.created_at) %>
   </span>
   <% if logged_in? && comment.commentable_type == "Post" %>
-    <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#comment-<%= comment.id %>-form" aria-expanded="false" aria-controls="collapseExample">
+    <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#comment-<%= comment.id %>-form" aria-expanded="false" aria-controls="comment-<%= comment.id %>-form">
       Reply
     </button>
 
@@ -22,22 +22,23 @@
   <% if comment.commentable_type == "Post" %>
     <% if logged_in? %>
 
-      <%= form_for [comment, Comment.new], html: { id: "comment-#{comment.id}-form", class: "collapse" } do |f| %>
+      <%= form_for [comment, Comment.new], html: { id: "comment-#{comment.id}-form", class: "collapse" }, remote: true do |f| %>
         <div class="form-row p-2">
           <%= f.text_area :content,
             placeholder: "Add a Reply",
-            class: "form-control" %>
+            class: "form-control",
+            rows: "1" %>
         </div>
         <div class="form-row p-2">
           <%= f.submit "Submit reply", class: "btn btn-primary" %>
         </div>
       <% end %>
     <% end %>
-    <% if comment.comments.any? %>
-      <ul class="list-group pt-3">
-        <%= render comment.comments %>
+      <ul class="list-group" id="Comment-<%=comment.id%>-comments">
+        <% if comment.comments.any? %>
+          <%= render comment.comments %>
+        <% end %>
       </ul>
-    <% end %>
   <% end %>
 </li>
 

@@ -1,0 +1,1 @@
+$("#<%= @comment.commentable_type %>-<%= @comment.commentable_id %>-comments").html("<%= escape_javascript(render partial: 'comments/comment', collection: @comment.commentable.comments) %>");
