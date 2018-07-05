@@ -14,7 +14,8 @@
             <%= f.text_area :content,
               id: :content,
               class: "form-control input-lg",
-              placeholder: 'Post content' %>
+              placeholder: 'Post content',
+              rows: "10" %>
           </div>
           <%= f.submit yield(:button_text),
             class: "btn btn-lg btn-primary btn-block" %>

@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="list-group-item" id="comment-<%= comment.id %>">
   <%= link_to comment.user.name, user_path(comment.user) %>
   &nbsp;&gt;&nbsp;
   <%= comment.content %>
@@ -11,7 +11,8 @@
       comment_url(comment),
       method: :delete,
       data: { confirm: "Delete the comment?" },
-      class: "btn btn-outline-danger btn-sm" %>
+      class: "btn btn-outline-danger btn-sm",
+      remote: true %>
   <% end %>
   <% if comment.commentable_type == "Post" %>
     <% if logged_in? %>

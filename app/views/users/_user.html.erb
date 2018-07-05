@@ -1,0 +1,13 @@
+<li class="list-group-item" id="user-<%= user.id %>">
+  <%= link_to user.name, user_path(user) %>
+  <% if user.admin? %>
+    <span class="badge badge-success">admin</span>
+  <% end %>
+  <% if logged_in? && current_user.admin? && !current_user?(user) %>
+    <%= link_to "delete", user, method: :delete,
+      data: { confirm: "Delete the user?" },
+      class: "btn btn-outline-danger btn-sm delete_user",
+      remote: true
+      %>
+  <% end %>
+</li>

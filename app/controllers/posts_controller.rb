@@ -52,6 +52,19 @@ class PostsController < ApplicationController
       redirect_to post_path(@post)
     end
   end
+ def destroy
+   @post.destroy
+    respond_to do |format|
+      format.html {
+        flash[:success] = "Post deleted"
+        redirect_back(fallback_location: root_path)
+      }
+      format.js {
+        render file: "posts/destroy.js.erb"
+      }
+    end
+  end
+
 
   private
 

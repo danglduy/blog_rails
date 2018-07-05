@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="list-group-item" id="post-<%= post.id %>">
   <%= link_to post.title, post_path(post) %>
 
 Written at
@@ -11,7 +11,8 @@ Written at
   <% if logged_in? && current_user.admin? || current_user?(post.user) %>
     <%= link_to "delete", post, method: :delete,
       data: { confirm: "Delete the post?" },
-      class: "btn btn-outline-danger btn-sm" %>
+      class: "btn btn-outline-danger btn-sm",
+      remote: true %>
   <% end %>
 </li>
 

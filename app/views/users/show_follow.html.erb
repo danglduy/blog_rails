@@ -19,16 +19,7 @@
   </div>
 <div class="col-md-9">
 <ul class="list-group list-group-flush">
-  <% @users.each do |user| %>
-    <li class="list-group-item">
-      <%= link_to user.name, user_path(user) %>
-      <% if logged_in? && current_user.admin? && !current_user?(user) %>
-        | <%= link_to "delete", user, method: :delete,
-          data: { confirm: "Delete the user?" }%>
-
-      <% end %>
-    </li>
-  <% end %>
+  <%= render partial: 'user', collection: @users %>
   <%= will_paginate(@users,
                     renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer)%>
 </ul>

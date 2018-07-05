@@ -40,14 +40,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @id = @user.id
     @user.destroy
     respond_to do |format|
       format.html {
         flash[:success] = "User deleted"
-        redirect_to users_url
+        redirect_back(fallback_location: root_path)
       }
-      format.js
+      format.js {
+        render file: "users/destroy.js.erb"
+      }
     end
   end
 

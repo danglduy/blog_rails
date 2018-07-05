@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user, only: [:destroy]
   before_action :find_commentable
+  before_action :find_comment, only: [:destroy]
 
   def create
     @comment = @commentable.comments.build(comment_params)
@@ -25,11 +26,16 @@ class CommentsController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
+
   def destroy
-    comment = Comment.find_by(id: params[:id])
-    comment.destroy
-    flash[:success] = "Comment deleted"
-    redirect_back(fallback_location: root_path)
+    @comment.destroy
+    respond_to do |format|
+      format.html {
+        flash[:success] = "Comment deleted"
+        redirect_back(fallback_location: root_path)
+      }
+      format.js
+    end
   end
 
   private
@@ -50,5 +56,9 @@ class CommentsController < ApplicationController
   def find_commentable
     @commentable = Comment.find_by(id: params[:comment_id]) if params[:comment_id]
     @commentable = Post.find_by(id: params[:post_id]) if params[:post_id]
+  end
+
+  def find_comment
+    @comment = Comment.find_by(id: params[:id])
   end
 end
