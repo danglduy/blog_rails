@@ -1,1 +1,1 @@
-$("#Comment-<%= @comment.id %>-comments").remove();
+$("#<%=@comment.commentable_type%>-<%= @comment.id %>-comments").remove();
