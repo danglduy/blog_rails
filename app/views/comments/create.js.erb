@@ -1,1 +1,2 @@
-$("#<%= @comment.commentable_type %>-<%= @comment.commentable_id %>-comments").html("<%= escape_javascript(render partial: 'comments/comment', collection: @comment.commentable.comments) %>");
+$("#<%= @comment.commentable_type %>-<%= @comment.commentable_id %>-comments").prepend("<%= escape_javascript(render partial: 'comments/comment', object: @comment) %>");
+$("#<%= @comment.commentable_type %>-<%= @comment.commentable_id %>-textarea").val('');

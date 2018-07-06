@@ -15,8 +15,8 @@
   </span>, by <%= link_to @post.user.name, user_path(@post.user) %></p>
   <%= @post.content.html_safe %>
   <% if logged_in?
-       if @post.user.following.include?(current_user) || @post.user == current_user %>
-      <%= render 'shared/comment_form'%>
+       if @post.user.following.include?(current_user) || @post.user == current_user || current_user.admin? %>
+     <%= render partial:'comments/comment_form', locals: { subcomment: @comment, url: post_comments_path(@post), commentable_type: @comment.commentable_type, placeholder: "What do you think?", formclass: "" } %>
       <% end
   else %>
     <li class="list-group-item list-group-item-warning">

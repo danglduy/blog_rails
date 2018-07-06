@@ -1,4 +1,4 @@
-<li class="list-group-item" id="comment-<%= comment.id %>">
+<li class="list-group-item" id="<%= comment.commentable_type %>-<%= comment.id %>-comments">
   <%= link_to comment.user.name, user_path(comment.user) %>
   &nbsp;&gt;&nbsp;
   <%= comment.content %>
@@ -6,7 +6,7 @@
     <%= time_ago_in_words(comment.created_at) %>
   </span>
   <% if logged_in? && comment.commentable_type == "Post" %>
-    <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#comment-<%= comment.id %>-form" aria-expanded="false" aria-controls="comment-<%= comment.id %>-form">
+    <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#Comment-<%= comment.id %>-form" aria-expanded="false" aria-controls="Comment-<%= comment.id %>-form">
       Reply
     </button>
 
@@ -21,18 +21,8 @@
   <% end %>
   <% if comment.commentable_type == "Post" %>
     <% if logged_in? %>
-
-      <%= form_for [comment, Comment.new], html: { id: "comment-#{comment.id}-form", class: "collapse" }, remote: true do |f| %>
-        <div class="form-row p-2">
-          <%= f.text_area :content,
-            placeholder: "Add a Reply",
-            class: "form-control",
-            rows: "1" %>
-        </div>
-        <div class="form-row p-2">
-          <%= f.submit "Submit reply", class: "btn btn-primary" %>
-        </div>
-      <% end %>
+      <% subcomment = Comment.new(user_id: current_user.id, commentable_id: comment.id, commentable_type: "Comment") %>
+      <%= render partial: 'comments/comment_form', object: comment, as: :comment, locals: { subcomment: subcomment, url: comment_comments_path(comment), commentable_type: "Comment", placeholder: "Add a reply", formclass: "collapse" } %>
     <% end %>
       <ul class="list-group" id="Comment-<%=comment.id%>-comments">
         <% if comment.comments.any? %>
