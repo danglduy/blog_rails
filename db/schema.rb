@@ -12,14 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2018_07_02_124416) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "comments", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.string "commentable_type"
-    t.bigint "commentable_id"
+    t.integer "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
@@ -28,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_07_02_124416) do
 
   create_table "posts", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
@@ -62,6 +59,4 @@ ActiveRecord::Schema.define(version: 2018_07_02_124416) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "comments", "users"
-  add_foreign_key "posts", "users"
 end
