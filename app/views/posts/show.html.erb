@@ -4,10 +4,14 @@
     <div class="col-md-11">
       <h4><%= @post.title %></h4>
     </div>
-    <div class="col-md-1">
-      <%=link_to "Edit post", edit_post_path(@post),
-        class: "btn btn-outline-secondary btn-sm" %>
-    </div>
+    <% if logged_in?
+         if @post.user == current_user || current_user.admin? %>
+       <div class="col-md-1">
+         <%=link_to "Edit post", edit_post_path(@post),
+           class: "btn btn-outline-secondary btn-sm" %>
+       </div>
+       <% end
+    end %>
   </div>
   <p>Written at
   <span title="<%= Time.zone.at(@post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>">
