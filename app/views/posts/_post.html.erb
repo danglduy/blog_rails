@@ -3,7 +3,7 @@
     <%= link_to post.user.name, user_path(post.user) %>&nbsp;&gt;&nbsp;
   <% end %>
   <%= link_to post.title, post_path(post) %>
-  <span title="<%= Time.zone.at(post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>" class="small"><%= time_ago_in_words(post.created_at) %> </span>
+  <span title="<%= Time.zone.at(post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>" class="small"><%= time_ago_in_words(post.created_at) + " ago"%> </span>
 <% if @postpage == nil %>
 <% end %>
   <% if logged_in? && current_user.admin? || current_user?(post.user) %>

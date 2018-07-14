@@ -2,9 +2,7 @@
   <%= link_to comment.user.name, user_path(comment.user) %>
   &nbsp;&gt;&nbsp;
   <%= comment.content %>
-  <span class="small">
-    <%= time_ago_in_words(comment.created_at) %>
-  </span>
+  <span title="<%= Time.zone.at(post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>" class="small"><%= time_ago_in_words(comment.created_at) + " ago"%> </span>
   <% if logged_in? && comment.commentable_type == "Post" %>
     <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#Comment-<%= comment.id %>-form" aria-expanded="false" aria-controls="Comment-<%= comment.id %>-form">
       Reply
