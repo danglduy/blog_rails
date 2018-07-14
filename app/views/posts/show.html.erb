@@ -17,7 +17,7 @@
   <span title="<%= Time.zone.at(@post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>">
     <%= time_ago_in_words(@post.created_at) + " ago" %>
   </span>, by <%= link_to @post.user.name, user_path(@post.user) %></p>
-  <%= @post.content.html_safe %>
+  <%= markdown(@post.content) %>
   <% if logged_in?
        if @post.user.following.include?(current_user) || @post.user == current_user || current_user.admin? %>
      <%= render partial:'comments/comment_form', locals: { subcomment: @comment, url: post_comments_path(@post), commentable_type: @comment.commentable_type, placeholder: "What do you think?", formclass: "" } %>

@@ -21,7 +21,11 @@ end
 users = User.order(:created_at).take(6)
 50.times do
     title = Faker::Lorem.sentence(1)
-    content = Faker::Lorem.paragraphs(4).map{|pr| "<p>#{pr}</p>"}.join
+    content = [ Faker::Markdown.emphasis,
+                Faker::Markdown.ordered_list,
+                Faker::Markdown.inline_code,
+                Faker::Markdown.block_code,
+                Faker::Markdown.table ].join("\n")
     users.each { |user| user.posts.create!(title: title, content: content)  }
 end
 users = User.order(:created_at).take(6)
