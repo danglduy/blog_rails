@@ -1,7 +1,6 @@
 class MasterController < ApplicationController
-
   def home
-    if logged_in?
+    if user_signed_in?
       @posts = current_user.feed.paginate(page: params[:page], per_page: 10)
       render 'feed'
     else
@@ -9,6 +8,7 @@ class MasterController < ApplicationController
       render 'posts/index'
     end
   end
+
   def help
   end
 
