@@ -12,7 +12,7 @@
         class: "blog-header-logo text-dark" %>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
-      <% if logged_in? %>
+      <% if user_signed_in? %>
         <%= link_to "Users", users_path, class:"btn btn-primary" %>
         &nbsp;
         <div class="dropdown">
@@ -26,17 +26,17 @@
             aria-labelledby="dropdownMenuButton">
             <%= link_to "My posts", user_path(current_user),
               class: "dropdown-item"%>
-            <%= link_to "Edit", edit_user_path(current_user),
+            <%= link_to "Edit", edit_user_registration_path(current_user),
               class: "dropdown-item"%>
-            <%= link_to "Logout", logout_path,
+            <%= link_to "Logout", destroy_user_session_path,
               class: "dropdown-item", method: "delete" %>
           </div>
         </div>
       <% else %>
-        <%= link_to "Login", login_path,
+        <%= link_to "Login", new_user_session_path,
           class: "btn btn-sm btn-outline-secondary" %>
         &nbsp;
-        <%= link_to "Sign up", signup_path,
+        <%= link_to "Sign up", new_user_registration_path,
             class: "btn btn-sm btn-outline-secondary" %>
       <% end %>
     </div>

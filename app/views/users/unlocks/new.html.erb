@@ -1,0 +1,23 @@
+<% provide(:title, "Resend unlock instructions") %>
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+        <%= devise_error_messages! %>
+        <fieldset>
+          <div class="form-group">
+            <%= f.email_field :email,
+              id: :email,
+              autofocus: true,
+              autocomplete: "email",
+              class: "form-control input-lg",
+              placeholder: 'name@domain.com' %>
+          </div>
+          <%= f.submit "Resend unlock instructions",
+            class: "btn btn-lg btn-primary btn-block" %>
+        </fieldset>
+        <%= render "users/shared/links" %>
+      <% end %>
+    </div>
+  </div>
+</div>
