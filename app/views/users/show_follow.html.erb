@@ -3,7 +3,7 @@
    <div class="card">
       <div class="card-body">
         <h5 class="card-title"><%= @user.name %></h5>
-        <%= render 'follow_form' if logged_in? %>
+        <%= render 'follow_form' if user_signed_in? %>
       </div>
       <ul class="list-group list-group-flush">
        <% if @user.posts.any? %>

@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
   def show
     @comments = @post.comments.paginate(page: params[:page], per_page: 10)
-    @comment = @post.comments.build(user_id: current_user.id) if logged_in?
+    @comment = @post.comments.build(user_id: current_user.id) if user_signed_in?
   end
 
   def new

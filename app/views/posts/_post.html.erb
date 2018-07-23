@@ -6,7 +6,7 @@
   <span title="<%= Time.zone.at(post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>" class="small"><%= time_ago_in_words(post.created_at) + " ago"%> </span>
 <% if @postpage == nil %>
 <% end %>
-  <% if logged_in? && current_user.admin? || current_user?(post.user) %>
+  <% if user_signed_in? && current_user.admin? || current_user?(post.user) %>
     <%= link_to "delete", post, method: :delete,
       data: { confirm: "Delete the post?" },
       class: "btn btn-outline-danger btn-sm",
