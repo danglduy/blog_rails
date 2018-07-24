@@ -5,7 +5,7 @@ User.create!(name:  "123",
              admin: true,
             )
 
-50.times do |n|
+30.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
@@ -18,7 +18,7 @@ end
 
 users = User.order(:created_at).take(6)
 
-20.times do
+10.times do
     title = Faker::Lorem.sentence(1)
     content = [ Faker::Markdown.emphasis,
                 Faker::Markdown.ordered_list,
@@ -42,7 +42,7 @@ end
 # Following relationships
 users = User.all
 user  = users.first
-following = users[2..30]
+following = users[2..15]
 followers = users[3..20]
 following.each { |followed| user.follow(followed)  }
 followers.each { |follower| follower.follow(user)  }
