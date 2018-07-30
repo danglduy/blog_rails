@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit,
-                                        :update, :destroy]
+                                            :update, :destroy]
   before_action :find_post, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -52,8 +52,9 @@ class PostsController < ApplicationController
       redirect_to post_path(@post)
     end
   end
- def destroy
-   @post.destroy
+
+  def destroy
+    @post.destroy
     respond_to do |format|
       format.html {
         flash[:success] = "Post deleted"
@@ -75,5 +76,4 @@ class PostsController < ApplicationController
   def post_params
     params.required(:post).permit(:title, :content)
   end
-
 end
