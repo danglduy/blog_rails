@@ -1,32 +1,56 @@
-<li class="list-group-item" id="<%= comment.commentable_type %>-<%= comment.id %>-comments">
-  <%= link_to comment.user.name, user_path(comment.user) %>
-  &nbsp;&gt;&nbsp;
-  <%= comment.content %>
-  <span title="<%= Time.zone.at(comment.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>" class="small"><%= time_ago_in_words(comment.created_at) + " ago"%> </span>
-  <% if user_signed_in? && comment.commentable_type == "Post" %>
-    <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#Comment-<%= comment.id %>-form" aria-expanded="false" aria-controls="Comment-<%= comment.id %>-form">
-      Reply
-    </button>
-
-  <% end %>
-  <% if user_signed_in? && current_user.admin? || current_user?(comment.user) || current_user?(comment.commentable.user) then %>
-    <%= link_to "delete",
-      comment_url(comment),
-      method: :delete,
-      data: { confirm: "Delete the comment?" },
-      class: "btn btn-outline-danger btn-sm",
-      remote: true %>
-  <% end %>
-  <% if comment.commentable_type == "Post" %>
-    <% if user_signed_in? %>
-      <% subcomment = Comment.new(user_id: current_user.id, commentable_id: comment.id, commentable_type: "Comment") %>
-      <%= render partial: 'comments/comment_form', object: comment, as: :comment, locals: { subcomment: subcomment, url: comment_comments_path(comment), commentable_type: "Comment", placeholder: "Add a reply", formclass: "collapse" } %>
+<li class="list-group-item"
+    id="<%= comment.commentable_type %>-<%= comment.id %>-comments">
+    <%= link_to comment.user.name, user_path(comment.user) %>
+    &nbsp;&gt;&nbsp;
+    <%= comment.content %>
+    <span title="<%= Time.zone.at(comment.created_at).
+      in_time_zone("Asia/Ho_Chi_Minh").
+      strftime("%Y-%b-%d %I:%M%p") %>"
+          class="small">
+          <%= time_ago_in_words(comment.created_at) + " ago" %>
+    </span>
+    <% if user_signed_in? && comment.commentable_type == "Post" %>
+      <button class="btn btn-outline-secondary btn-sm"
+              type="button"
+              data-toggle="collapse"
+              data-target="#Comment-<%= comment.id %>-form"
+              aria-expanded="false" aria-controls="Comment-<%= comment.id %>-form">
+              Reply
+      </button>
     <% end %>
-      <ul class="list-group" id="Comment-<%=comment.id%>-comments">
-        <% if comment.comments.any? %>
-          <%= render comment.comments %>
-        <% end %>
-      </ul>
+    <% if user_signed_in? && current_user.admin? || current_user?(comment.user) || current_user?(comment.commentable.user) then %>
+      <%= link_to "delete",
+        comment_url(comment),
+        method: :delete,
+        data: { confirm: "Delete the comment?" },
+        class: "btn btn-outline-danger btn-sm",
+        remote: true %>
+    <% end %>
+    <% if comment.commentable_type == "Post" %>
+      <% if user_signed_in? %>
+        <% subcomment = Comment.new(
+          user_id: current_user.id,
+          commentable_id: comment.id,
+          commentable_type: "Comment"
+        ) %>
+      <%= render partial: 'comments/comment_form',
+        object: comment,
+        as: :comment,
+        locals: {
+          subcomment: subcomment,
+          url: comment_comments_path(comment),
+          commentable_type: "Comment",
+          placeholder: "Add a reply",
+          formclass: "collapse"
+        }
+      %>
   <% end %>
+  <ul class="list-group"
+    id="Comment-<%=comment.id%>-comments">
+    <% if comment.comments.any? %>
+      <%= render comment.comments %>
+    <% end %>
+  </ul>
+<% end %>
 </li>
 

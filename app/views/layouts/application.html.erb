@@ -18,7 +18,13 @@
           elsif message_type == "alert"
             message_type = "danger"
           end %>
-          <div class="col-md-12" ><%= content_tag(:div, message, class: "alert alert-#{message_type}") %></div>
+          <div class="col-md-12">
+            <%= content_tag(
+              :div,
+              message,
+              class: "alert alert-#{message_type}")
+            %>
+          </div>
         <% end %>
         <%= yield %>
         <%= render 'layouts/footer'%>

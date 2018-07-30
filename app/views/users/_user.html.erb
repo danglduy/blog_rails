@@ -4,10 +4,14 @@
     <span class="badge badge-success">admin</span>
   <% end %>
   <% if user_signed_in? && current_user.admin? && !current_user?(user) %>
-    <%= link_to "delete", user, method: :delete,
-      data: { confirm: "Delete the user?" },
+    <%= link_to "delete",
+      user,
+      method: :delete,
+      data: {
+        confirm: "Delete the user?"
+      },
       class: "btn btn-outline-danger btn-sm delete_user",
       remote: true
-      %>
-  <% end %>
+    %>
+<% end %>
 </li>

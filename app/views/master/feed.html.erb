@@ -4,6 +4,7 @@
   <ul class="list-group list-group-flush">
   <%= render partial: 'posts/post', collection: @posts %>
   <%= will_paginate @posts,
-    renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+  %>
   </ul>
 </div>

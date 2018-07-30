@@ -1,14 +1,24 @@
 <li class="list-group-item" id="post-<%= post.id %>">
   <% if post.user != @user %>
-    <%= link_to post.user.name, user_path(post.user) %>&nbsp;&gt;&nbsp;
+    <%= link_to post.user.name, user_path(post.user) %>
+    &nbsp;&gt;&nbsp;
   <% end %>
   <%= link_to post.title, post_path(post) %>
-  <span title="<%= Time.zone.at(post.created_at).in_time_zone("Asia/Ho_Chi_Minh").strftime("%Y-%b-%d %I:%M%p")%>" class="small"><%= time_ago_in_words(post.created_at) + " ago"%> </span>
-<% if @postpage == nil %>
-<% end %>
+  <span title="<%= Time.zone.at(post.created_at).
+    in_time_zone("Asia/Ho_Chi_Minh").
+    strftime("%Y-%b-%d %I:%M%p") %>"
+        class="small">
+        <%= time_ago_in_words(post.created_at) + " ago" %>
+  </span>
+  <% if @postpage == nil %>
+  <% end %>
   <% if user_signed_in? && current_user.admin? || current_user?(post.user) %>
-    <%= link_to "delete", post, method: :delete,
-      data: { confirm: "Delete the post?" },
+    <%= link_to "delete",
+      post,
+      method: :delete,
+      data: {
+        confirm: "Delete the post?"
+      },
       class: "btn btn-outline-danger btn-sm",
       remote: true %>
   <% end %>

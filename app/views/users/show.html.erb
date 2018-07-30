@@ -19,7 +19,9 @@
           </span> Posts
         </li>
       <% end %>
-      <li class="list-group-item"><%= render 'users/stats' %></li>
+      <li class="list-group-item">
+        <%= render 'users/stats' %>
+      </li>
     </ul>
   </div>
 </div>
@@ -29,7 +31,9 @@
       <%= render @posts %>
     </ul>
     <br>
-    <%= will_paginate @posts,
-      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    <%= will_paginate(
+      @posts,
+      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+    ) %>
   <% end %>
 </div>

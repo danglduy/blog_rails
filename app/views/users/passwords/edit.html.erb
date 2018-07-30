@@ -2,28 +2,38 @@
 <div class="container-fluid py-3">
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put  }) do |f| %>
-        <%= devise_error_messages! %>
-        <fieldset>
-          <%= f.hidden_field :reset_password_token %>
-          <div class="form-group">
-            <%= f.password_field :password,
-              id: :password,
-              class: "form-control input-lg",
-              autofocus: true
-              placeholder: 'New password' %>
-          </div>
-          <div class="form-group">
-            <%= f.password_field :password_confirmation,
-              id: :password_confirmation,
-              class: "form-control input-lg",
-              placeholder: 'Confirm new password' %>
-          </div>
-          <%= f.submit "Change my password!",
-            class: "btn btn-lg btn-primary btn-block" %>
-        </fieldset>
-        <%= render "users/shared/links" %>
-      <% end %>
+      <%= form_for(
+        resource,
+        as: resource_name,
+        url: password_path(resource_name),
+        html: {
+          method: :put
+        }) do |f|
+      %>
+    <%= devise_error_messages! %>
+    <fieldset>
+      <%= f.hidden_field :reset_password_token %>
+      <div class="form-group">
+        <%= f.password_field :password,
+          id: :password,
+          class: "form-control input-lg",
+          autofocus: true,
+          placeholder: 'New password'
+        %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password_confirmation,
+          id: :password_confirmation,
+          class: "form-control input-lg",
+          placeholder: 'Confirm new password'
+        %>
+      </div>
+      <%= f.submit "Change my password!",
+        class: "btn btn-lg btn-primary btn-block"
+      %>
+    </fieldset>
+    <%= render "users/shared/links" %>
+  <% end %>
     </div>
   </div>
 </div>

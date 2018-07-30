@@ -8,17 +8,20 @@
             <%= f.text_field :title,
               id: :title,
               class: "form-control input-lg",
-              placeholder: 'Post title' %>
+              placeholder: 'Post title'
+            %>
           </div>
           <div class="form-group">
             <%= f.text_area :content,
               id: :content,
               class: "form-control input-lg",
               placeholder: 'Post content',
-              rows: "10" %>
+              rows: "10"
+            %>
           </div>
           <%= f.submit yield(:button_text),
-            class: "btn btn-lg btn-primary btn-block" %>
+            class: "btn btn-lg btn-primary btn-block"
+          %>
         </fieldset>
       <% end %>
     </div>

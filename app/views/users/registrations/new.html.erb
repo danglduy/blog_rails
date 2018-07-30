@@ -3,42 +3,51 @@
 <div class="container-fluid py-3">
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
-        <fieldset>
-          <div class="form-group">
-            <%= f.text_field :name,
-              id: :name,
-              autofocus: true,
-              class: "form-control input-lg",
-              placeholder: 'Your name' %>
-          </div>
-          <div class="form-group">
-            <%= f.email_field :email,
-              id: :email,
-              autocomplete: "email",
-              class: "form-control input-lg",
-              placeholder: 'name@domain.com' %>
-          </div>
-          <div class="form-group">
-            <%= f.password_field :password,
-              id: :password,
-              autocomplete: "off",
-              class: "form-control input-lg",
-              placeholder: 'Password' %>
-          </div>
-          <div class="form-group">
-            <%= f.password_field :password_confirmation,
-              id: :password_confirmation,
-              autocomplete: "off",
-              class: "form-control input-lg",
-              placeholder: 'Password confirmation' %>
-          </div>
-          <%= f.submit yield(:button_text),
-            class: "btn btn-lg btn-primary btn-block" %>
-        </fieldset>
-        <%= render "users/shared/links" %>
-      <% end %>
+      <%= form_for(
+        resource,
+        as: resource_name,
+        url: registration_path(resource_name)
+      ) do |f| %>
+      <%= devise_error_messages! %>
+      <fieldset>
+        <div class="form-group">
+          <%= f.text_field :name,
+            id: :name,
+            autofocus: true,
+            class: "form-control input-lg",
+            placeholder: 'Your name'
+          %>
+        </div>
+        <div class="form-group">
+          <%= f.email_field :email,
+            id: :email,
+            autocomplete: "email",
+            class: "form-control input-lg",
+            placeholder: 'name@domain.com'
+          %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password,
+            id: :password,
+            autocomplete: "off",
+            class: "form-control input-lg",
+            placeholder: 'Password'
+          %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password_confirmation,
+            id: :password_confirmation,
+            autocomplete: "off",
+            class: "form-control input-lg",
+            placeholder: 'Password confirmation'
+          %>
+        </div>
+        <%= f.submit yield(:button_text),
+          class: "btn btn-lg btn-primary btn-block"
+        %>
+      </fieldset>
+      <%= render "users/shared/links" %>
+    <% end %>
     </div>
   </div>
 </div>

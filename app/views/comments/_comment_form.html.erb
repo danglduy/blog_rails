@@ -1,12 +1,21 @@
-<%= form_for(subcomment, url: url, remote: true, html: { id: "#{commentable_type}-#{subcomment.commentable_id}-form", class: formclass }) do |f| %>
+<%= form_for(
+  subcomment,
+  url: url,
+  remote: true,
+  html: {
+    id: "#{commentable_type}-#{subcomment.commentable_id}-form",
+    class: formclass
+  }
+) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
-  <div class="form-row p-2"><%= f.text_area :content,
+<div class="form-row p-2">
+  <%= f.text_area :content,
     placeholder: placeholder,
     class: "form-control",
     id: "#{commentable_type}-#{subcomment.commentable_id}-textarea"
-    %>
-  </div>
-  <div class="form-row p-2">
-    <%= f.submit "Comment", class: "btn btn-primary" %>
-  </div>
+  %>
+</div>
+<div class="form-row p-2">
+  <%= f.submit "Comment", class: "btn btn-primary" %>
+</div>
 <% end %>

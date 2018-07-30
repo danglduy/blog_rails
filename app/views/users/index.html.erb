@@ -1,10 +1,11 @@
 <% provide(:title, 'All users') %>
 <div class="col-md-8 mx-auto">
-<ul class="list-group list-group-flush">
-  <%= render partial: 'user', collection: @users %>
-  <%= will_paginate(@users,
-                    renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
-
-</ul>
+  <ul class="list-group list-group-flush">
+    <%= render partial: 'user', collection: @users %>
+    <%= will_paginate(
+      @users,
+      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+    ) %>
+  </ul>
 </div>
 

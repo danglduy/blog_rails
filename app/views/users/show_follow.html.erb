@@ -1,26 +1,30 @@
 <% provide(:title, @title) %>
 <div class="col-md-3">
-   <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= @user.name %></h5>
-        <%= render 'follow_form' if user_signed_in? %>
-      </div>
-      <ul class="list-group list-group-flush">
-       <% if @user.posts.any? %>
-         <li class="list-group-item">
-            <span class="badge badge-primary">
-              <%= @user.posts.count %>
-            </span> Posts
-         </li>
-       <% end %>
-        <li class="list-group-item"><%= render 'users/stats' %></li>
-      </ul>
-   </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= @user.name %></h5>
+      <%= render 'follow_form' if user_signed_in? %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% if @user.posts.any? %>
+        <li class="list-group-item">
+          <span class="badge badge-primary">
+            <%= @user.posts.count %>
+          </span> Posts
+        </li>
+      <% end %>
+      <li class="list-group-item">
+        <%= render 'users/stats' %>
+      </li>
+    </ul>
   </div>
+</div>
 <div class="col-md-9">
-<ul class="list-group list-group-flush">
-  <%= render partial: 'user', collection: @users %>
-  <%= will_paginate(@users,
-                    renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer)%>
-</ul>
+  <ul class="list-group list-group-flush">
+    <%= render partial: 'user', collection: @users %>
+    <%= will_paginate(
+      @users,
+      renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+    ) %>
+  </ul>
 </div>
