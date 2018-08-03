@@ -26,9 +26,17 @@ sqlite3: &sqlite3
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     timeout: 5000
 
+mysql: &mysql
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password: 12345678
+  host: db
+
 development:
-  <<: *sqlite3
-  database: db/development.sqlite3
+  <<: *mysql
+  database: dev
 
 test:
   <<: *sqlite3
