@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def full_title(page_title = '')
+  def full_title page_title = ""
     base_title = "Awesome Blog"
     if page_title.empty?
       base_title
@@ -8,7 +8,7 @@ module ApplicationHelper
     end
   end
 
-  def markdown(text)
+  def markdown text
     options = {
       autolink: true,
       space_after_headers: true,
@@ -17,7 +17,7 @@ module ApplicationHelper
       highlight: true,
       footnotes: true,
       tables: true,
-      link_attributes: {rel: 'nofollow', target: "_blank"}
+      link_attributes: {rel: "nofollow", target: "_blank"}
     }
     extensions = {
       autolink:           true,
@@ -32,5 +32,5 @@ module ApplicationHelper
     renderer = Redcarpet::Render::HTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
     markdown.render(text).html_safe
-   end
+  end
 end

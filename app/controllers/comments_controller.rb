@@ -3,31 +3,20 @@ class CommentsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   before_action :find_commentable
   before_action :find_comment, only: [:destroy]
+  before_action :new_comment, only: [:create]
+  before_action :prevent_nested_comment, only: [:create]
 
   def create
-    @comment = @commentable.comments.build(comment_params)
-
-    if @comment.commentable_type == "Post" || @comment.commentable.commentable_type != "Comment"
-      if @comment.save
-        respond_to do |format|
-          format.html {
-            flash[:success] = "Your comment was successfully posted!"
-            redirect_back(fallback_location: root_path)
-          }
-          format.js
+    if @comment.save
+      respond_to do |format|
+        format.html do
+          flash[:success] = "Your comment was successfully posted!"
+          redirect_back(fallback_location: root_path)
         end
-      else
-        messages = ""
-        @comment.errors.each do |key, value|
-          message = "#{key}" + ": " + "#{value}" unless value == nil
-          unless message == nil then messages = "#{messages}" + "#{message}. "
-          end
-        end
-        flash[:danger] = messages unless messages == ""
-        redirect_back(fallback_location: root_path)
+        format.js
       end
     else
-      flash[:danger] = "Nested comment is not permitted!"
+      flash[:danger] = @comments.errors.full_messages.to_sentence
       redirect_back(fallback_location: root_path)
     end
   end
@@ -35,23 +24,22 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html {
+      format.html do
         flash[:success] = "Comment deleted"
         redirect_back(fallback_location: root_path)
-      }
+      end
       format.js
     end
   end
 
   private
-
   def correct_user
     @comment = Comment.find_by(id: params[:id])
     @commentuser = @comment.user
     @postuser = @comment.commentable.user
-    unless (current_user == @commentuser) || (current_user == @postuser) || current_user.admin? then
-      redirect_to(root_url)
-    end
+    return if (current_user != (@commentuser || @postuser)) ||
+              !current_user.admin?
+    redirect_to(root_url)
   end
 
   def comment_params
@@ -59,11 +47,25 @@ class CommentsController < ApplicationController
   end
 
   def find_commentable
-    @commentable = Comment.find_by(id: params[:comment_id]) if params[:comment_id]
-    @commentable = Post.find_by(id: params[:post_id]) if params[:post_id]
+    @commentable = if params[:comment_id]
+                     Comment.find_by(id: params[:comment_id])
+                   elsif params[:post_id]
+                     Post.find_by(id: params[:post_id])
+                   end
   end
 
   def find_comment
     @comment = Comment.find_by(id: params[:id])
+  end
+
+  def new_comment
+    @comment = @commentable.comments.build(comment_params)
+  end
+
+  def prevent_nested_comment
+    return unless (new_comment.commentable.is_a? Comment) &&
+                  (new_comment.commentable.commentable.is_a? Comment)
+    flash[:danger] = "Nested comment is not permitted!"
+    redirect_back(fallback_location: root_path)
   end
 end

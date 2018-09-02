@@ -18,19 +18,23 @@ class User < ApplicationRecord
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 50},
-    format: { with: VALID_EMAIL_REGEX  },
-    uniqueness: { case_sensitive: false }
+    format: {with: VALID_EMAIL_REGEX},
+    uniqueness: {case_sensitive: false}
 
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: {minimum: 6}, allow_nil: true
   has_secure_password
 
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-      BCrypt::Engine.cost
+  def self.digest string
+    cost =
+      if ActiveModel::SecurePassword.min_cost
+        BCrypt::Engine::MIN_COST
+      else
+        Crypt::Engine.cost
+      end
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -39,7 +43,7 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  def authenticated?(attribute, token)
+  def authenticated? attribute, token
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
@@ -68,7 +72,6 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
-
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
@@ -82,15 +85,15 @@ class User < ApplicationRecord
     self.activation_digest = User.digest(activation_token)
   end
 
-  def follow(other_user)
+  def follow other_user
     following << other_user
   end
 
-  def unfollow(other_user)
+  def unfollow other_user
     following.delete(other_user)
   end
 
-  def following?(other_user)
+  def following? other_user
     following.include?(other_user)
   end
 

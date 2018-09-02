@@ -22,52 +22,36 @@ class PostsController < ApplicationController
       flash[:success] = "Post created!"
       redirect_to user_path(current_user)
     else
-      messages = ""
-      @post.errors.each do |key, value|
-        message = "#{key}" + ": " + "#{value}" unless value == nil
-        unless message == nil then messages = "#{messages}" + "#{message}. "
-        end
-      end
-      flash[:danger] = messages unless messages == ""
+      flash[:danger] = @post.errors.full_messages.to_sentence
       redirect_to new_post_path
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @post.update_attributes(post_params)
       flash[:success] = "Post updated"
-      # redirect_to user_path(current_user)
-      redirect_to post_path(@post)
     else
-      messages = ""
-      @post.errors.each do |key, value|
-        message = "#{key}" + ": " + "#{value}" unless value == nil
-        unless message == nil then messages = "#{messages}" + "#{message}. "
-        end
-      end
-      flash[:danger] = messages unless messages == ""
-      redirect_to post_path(@post)
+      flash[:danger] = @post.errors.full_messages.to_sentence
     end
+    redirect_to post_path(@post)
   end
- def destroy
-   @post.destroy
+
+  def destroy
+    @post.destroy
     respond_to do |format|
-      format.html {
+      format.html do
         flash[:success] = "Post deleted"
         redirect_back(fallback_location: root_path)
-      }
-      format.js {
+      end
+      format.js do
         render file: "posts/destroy.js.erb"
-      }
+      end
     end
   end
 
-
   private
-
   def find_post
     @post = Post.find_by(id: params[:id])
   end
@@ -75,5 +59,4 @@ class PostsController < ApplicationController
   def post_params
     params.required(:post).permit(:title, :content)
   end
-
 end
