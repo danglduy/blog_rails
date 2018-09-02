@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit,
-                                            :update, :destroy]
+  before_action :logged_in_user, only: [:new, :create, :edit,
+                                        :update, :destroy]
   before_action :find_post, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
   def show
     @comments = @post.comments.paginate(page: params[:page], per_page: 10)
-    @comment = @post.comments.build(user_id: current_user.id) if user_signed_in?
+    @comment = @post.comments.build(user_id: current_user.id) if logged_in?
   end
 
   def new
@@ -22,53 +22,36 @@ class PostsController < ApplicationController
       flash[:success] = "Post created!"
       redirect_to user_path(current_user)
     else
-      messages = ""
-      @post.errors.each do |key, value|
-        message = "#{key}" + ": " + "#{value}" unless value == nil
-        unless message == nil then messages = "#{messages}" + "#{message}. "
-        end
-      end
-      flash[:danger] = messages unless messages == ""
+      flash[:danger] = @post.errors.full_messages.to_sentence
       redirect_to new_post_path
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @post.update_attributes(post_params)
       flash[:success] = "Post updated"
-      # redirect_to user_path(current_user)
-      redirect_to post_path(@post)
     else
-      messages = ""
-      @post.errors.each do |key, value|
-        message = "#{key}" + ": " + "#{value}" unless value == nil
-        unless message == nil then messages = "#{messages}" + "#{message}. "
-        end
-      end
-      flash[:danger] = messages unless messages == ""
-      redirect_to post_path(@post)
+      flash[:danger] = @post.errors.full_messages.to_sentence
     end
+    redirect_to post_path(@post)
   end
 
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html {
+      format.html do
         flash[:success] = "Post deleted"
         redirect_back(fallback_location: root_path)
-      }
-      format.js {
+      end
+      format.js do
         render file: "posts/destroy.js.erb"
-      }
+      end
     end
   end
 
-
   private
-
   def find_post
     @post = Post.find_by(id: params[:id])
   end
