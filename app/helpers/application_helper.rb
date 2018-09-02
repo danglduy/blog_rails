@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def full_title(page_title = '')
+  def full_title page_title = ""
     base_title = "Awesome Blog"
     if page_title.empty?
       base_title
@@ -8,7 +8,7 @@ module ApplicationHelper
     end
   end
 
-  def markdown(text)
+  def markdown text
     options = {
       autolink: true,
       space_after_headers: true,
@@ -17,7 +17,7 @@ module ApplicationHelper
       highlight: true,
       footnotes: true,
       tables: true,
-      link_attributes: {rel: 'nofollow', target: "_blank"}
+      link_attributes: {rel: "nofollow", target: "_blank"}
     }
 
     extensions = {
@@ -36,11 +36,11 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
 
-  def current_user?(user)
+  def current_user? user
     user == current_user
   end
 
-  def redirect_back_or(default)
+  def redirect_back_or default
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end

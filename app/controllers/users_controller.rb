@@ -17,33 +17,32 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html {
+      format.html do
         flash[:success] = "User deleted"
         redirect_back(fallback_location: root_path)
-      }
-      format.js {
+      end
+      format.js do
         render file: "users/destroy.js.erb"
-      }
+      end
     end
   end
 
   def following
     @title = "Following"
     @users = @user.following.paginate(page: params[:page], per_page: 10)
-    render 'show_follow'
+    render "show_follow"
   end
 
   def followers
     @title = "Followers"
     @users = @user.followers.paginate(page: params[:page], per_page: 10)
-    render 'show_follow'
+    render "show_follow"
   end
 
   private
-
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
+      :password_confirmation)
   end
 
   def correct_user
