@@ -2,11 +2,11 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :active_relationships,  class_name:  "Relationship",
-                                   foreign_key: "follower_id",
-                                   dependent:   :destroy
+    foreign_key: "follower_id",
+    dependent:   :destroy
   has_many :passive_relationships, class_name:  "Relationship",
-                                   foreign_key: "followed_id",
-                                   dependent:   :destroy
+    foreign_key: "followed_id",
+    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
@@ -24,10 +24,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_secure_password
 
-	# Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
+      BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
@@ -95,10 +94,10 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-	def feed
-		following_ids = "SELECT followed_id FROM relationships
-                     WHERE  follower_id = :user_id"
+  def feed
+    following_ids = "SELECT followed_id FROM relationships
+      WHERE  follower_id = :user_id"
     Post.where("user_id IN (#{following_ids})
-                     OR user_id = :user_id", user_id: id)
-	end
+      OR user_id = :user_id", user_id: id)
+  end
 end

@@ -26,4 +26,5 @@
 /config/master.key
 # Ignore all db files"
 /db/*.sqlite3
-
+.ruby-version
+Gemfile.lock
