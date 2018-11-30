@@ -12,7 +12,6 @@ gem "devise", "~> 4.2"
 gem "faker", "~> 1.8", ">= 1.8.7"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
-gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.0"
 gem "redcarpet", "~> 3.3", ">= 3.3.4"
 gem "rubocop", "~> 0.54.0", require: false
@@ -23,11 +22,13 @@ gem "wdm", ">= 0.1.0" if Gem.win_platform?
 gem "will_paginate", "~> 3.1", ">= 3.1.6"
 
 group :production do
+  gem "passenger", "~> 5.3", ">= 5.3.5"
   gem "pg", ">= 0.18", "< 2.0"
 end
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "puma", "~> 3.11"
   gem "sqlite3", "~> 1.3", ">= 1.3.13"
 end
 

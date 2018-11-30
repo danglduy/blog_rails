@@ -27,6 +27,5 @@
 # Ignore all db files"
 /db/*.sqlite3
 
-Gemfile.lock
 .ruby-version
 
