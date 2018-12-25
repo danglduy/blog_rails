@@ -1,5 +1,5 @@
 <% provide(:title, 'All posts') %>
-<ul class="col-md-8 mx-auto list-group list-group-flush">
+<ul class="col-md-12 mx-auto list-group list-group-flush">
   <%= render partial: 'posts/post', collection: @posts %>
   <%= will_paginate @posts,
     renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
