@@ -169,6 +169,10 @@ Style/EmptyLiteral:
   Description: "Prefer literals to Array.new/Hash.new/String.new."
   Enabled: true
 
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+  Enabled: true
+
 Style/Encoding:
   Description: "Use UTF-8 as the source file encoding."
   Enabled: true
@@ -245,6 +249,7 @@ Layout/IndentHash:
 
 Style/Lambda:
   Description: "Use the new lambda literal syntax for single-line blocks."
+  EnforcedStyle: literal
   Enabled: true
 
 Style/LambdaCall:

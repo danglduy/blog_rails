@@ -17,10 +17,12 @@ AllCops:
     - 'bin/*'
     - 'db/**/*'
     - 'spec/**/*'
+    - 'node_modules/**/*'
     - 'script/rails'
     - 'config/**/*'
     - 'config.ru'
     - 'Rakefile'
+    - 'Guardfile'
 
 # Indent private/protected/public as deep as method definitions
 Layout/AccessModifierIndentation:

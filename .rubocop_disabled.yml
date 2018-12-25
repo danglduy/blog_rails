@@ -56,6 +56,9 @@ Layout/AlignArray:
                  one line.
   Enabled: false
 
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
 Style/UnneededPercentQ:
   Description: "Checks for %q/%Q when single quotes or double quotes would do."
   Enabled: false

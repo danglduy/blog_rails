@@ -6,16 +6,18 @@ Rails.application.routes.draw do
   get 'about', to: 'master#about'
   get 'contact', to: 'master#contact'
 
-  resources :users, only: [:index, :show, :destroy] do
-    member do
-      get :following, :followers
-    end
+  resources :users, only: %i(index show destroy) do
+    resources :followings, only: :index
+    resources :followers, only: :index
   end
+
   resources :posts do
     resources :comments
   end
+
   resources :comments do
     resources :comments
   end
-  resources :relationships, only: [:create, :destroy]
+
+  resources :relationships, only: %i(create destroy)
 end
