@@ -1,4 +1,10 @@
 module ApplicationHelper
+  class HTMLwithPygments < Redcarpet::Render::HTML
+    def block_code(code, language)
+      Pygments.highlight(code, lexer: language)
+    end
+  end
+
   def full_title page_title = ""
     base_title = "Awesome Blog"
     if page_title.empty?
@@ -8,32 +14,22 @@ module ApplicationHelper
     end
   end
 
-  def markdown text
+  def markdown content
+    renderer = HTMLwithPygments.new(hard_wrap: true, filter_html: true, tables: true)
     options = {
       autolink: true,
-      space_after_headers: true,
-      fenced_code_blocks: true,
-      underline: true,
-      highlight: true,
-      footnotes: true,
-      tables: true,
-      link_attributes: {rel: "nofollow", target: "_blank"}
-    }
-
-    extensions = {
-      autolink:           true,
-      superscript:        true,
-      disable_indented_code_blocks: true,
-      tables: true,
       no_intra_emphasis: true,
+      disable_indented_code_blocks: true,
+      fenced_code_blocks: true,
+      lax_html_blocks: true,
       strikethrough: true,
-      with_toc_data: true,
-      fenced_code_blocks: true
+      superscript: true,
+      quote: true,
+      highlight: true,
+      tables: true,
+      emoji: true
     }
-
-    renderer = Redcarpet::Render::HTML.new(options)
-    markdown = Redcarpet::Markdown.new(renderer, extensions)
-    markdown.render(text).html_safe
+    Redcarpet::Markdown.new(renderer, options).render(content).html_safe
   end
 
   def current_user? user

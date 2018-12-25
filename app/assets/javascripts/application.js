@@ -16,4 +16,9 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require simplemde.min
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  var simplemde = new SimpleMDE({ element: document.getElementById('content') });
+});
