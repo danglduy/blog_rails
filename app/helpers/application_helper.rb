@@ -1,8 +1,10 @@
 module ApplicationHelper
+  require "redcarpet"
+  require "rouge"
+  require "rouge/plugins/redcarpet"
+
   class HTMLwithPygments < Redcarpet::Render::HTML
-    def block_code(code, language)
-      Pygments.highlight(code, lexer: language)
-    end
+    include Rouge::Plugins::Redcarpet
   end
 
   def full_title page_title = ""
@@ -15,7 +17,10 @@ module ApplicationHelper
   end
 
   def markdown content
-    renderer = HTMLwithPygments.new(hard_wrap: true, filter_html: true, tables: true)
+    renderer = HTMLwithPygments.new(
+      hard_wrap: true, filter_html: true, tables: true
+    )
+
     options = {
       autolink: true,
       no_intra_emphasis: true,

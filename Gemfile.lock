@@ -179,6 +179,7 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rouge (3.3.0)
     rubocop (0.54.0)
       parallel (~> 1.10)
       parser (>= 2.5)
@@ -265,10 +266,11 @@ DEPENDENCIES
   pygments.rb (~> 1.2, >= 1.2.1)
   rails (~> 5.2.0)
   redcarpet (~> 3.3, >= 3.3.4)
+  rouge (~> 3.3)
   rubocop (~> 0.54.0)
   sass-rails (~> 5.0)
   selenium-webdriver
-  simplemde-rails
+  simplemde-rails (~> 1.11, >= 1.11.2)
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.3, >= 1.3.13)
