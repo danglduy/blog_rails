@@ -20,5 +20,8 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
-  var simplemde = new SimpleMDE({ element: document.getElementById('content') });
+  var simplemde = new SimpleMDE({
+    element: document.getElementById('content'),
+    spellChecker: false
+  });
 });
