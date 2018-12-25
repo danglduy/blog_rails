@@ -54,6 +54,8 @@ class PostsController < ApplicationController
   private
   def find_post
     @post = Post.find_by id: params[:id]
+    return if @post
+    redirect_to root_url, flash: {danger: "Post not found"}
   end
 
   def post_params
