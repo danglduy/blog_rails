@@ -25,9 +25,14 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /config/database.yml
+.env
+
 /db/schema.rb
 # Ignore all db files"
 /db/*.sqlite3
 
 .ruby-version
 
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
