@@ -1,4 +1,4 @@
-class FollowingsController < ApplicationController
+class FollowingController < ApplicationController
   before_action :find_user, only: :index
 
   def index

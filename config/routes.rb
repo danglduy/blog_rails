@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'contact', to: 'master#contact'
 
   resources :users, only: %i(index show destroy) do
-    resources :followings, only: :index
+    resources :following, only: :index
     resources :followers, only: :index
   end
 
