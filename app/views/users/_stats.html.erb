@@ -1,5 +1,5 @@
 <% @user ||= current_user %>
-<a href="<%= user_following_path(@user) %>">
+<a href="<%= user_following_index_path(@user) %>">
   <span class="badge badge-primary" id="following">
     <%= @user.following.count %>
   </span>
