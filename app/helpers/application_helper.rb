@@ -18,7 +18,7 @@ module ApplicationHelper
 
   def markdown content
     renderer = HTMLwithPygments.new(
-      hard_wrap: true, filter_html: true, tables: true
+      hard_wrap: true, filter_html: true
     )
 
     options = {
@@ -34,7 +34,8 @@ module ApplicationHelper
       tables: true,
       emoji: true
     }
-    Redcarpet::Markdown.new(renderer, options).render(content).html_safe
+
+    @markdown ||= Redcarpet::Markdown.new(renderer, options).render(content).html_safe
   end
 
   def current_user? user
