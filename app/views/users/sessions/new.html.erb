@@ -5,40 +5,34 @@
       <%= form_for(
         resource,
         as: resource_name,
-        url: session_path(resource_name)
-      ) do |f| %>
-      <%= devise_error_messages! %>
-      <fieldset>
-        <div class="form-group">
-          <%= f.email_field :email,
-            id: :email,
-            autofocus: true,
-            autocomplete: "email",
-            class: "form-control input-lg",
-            placeholder: 'name@domain.com'
-          %>
-        </div>
-        <div class="form-group">
-          <%= f.password_field :password,
-            id: :password,
-            class: "form-control input-lg",
-            placeholder: 'Password'
-          %>
-        </div>
-        <%= f.label :remember_me,
-          class: "custom-control custom-checkbox my-1 mr-sm-2" do
-        %>
-      <%= f.check_box :remember_me,
-        class: "custom-control-input"
-      %>
-    <span class="custom-control-label">Remember me </span>
-  <% end %>
-  <%= f.submit "Log me in!",
-    class: "btn btn-lg btn-primary btn-block"
-  %>
-      </fieldset>
-      <%= render "users/shared/links" %>
-    <% end %>
+        url: session_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <fieldset>
+          <div class="form-group">
+            <%= f.email_field :email,
+              id: :email,
+              autofocus: true,
+              autocomplete: "email",
+              class: "form-control input-lg",
+              placeholder: 'name@domain.com' %>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :password,
+              id: :password,
+              class: "form-control input-lg",
+              placeholder: 'Password' %>
+          </div>
+          <%= f.label :remember_me,
+            class: "custom-control custom-checkbox my-1 mr-sm-2" do %>
+            <%= f.check_box :remember_me,
+              class: "custom-control-input" %>
+            <span class="custom-control-label">Remember me </span>
+          <% end %>
+          <%= f.submit "Login",
+            class: "btn btn-lg btn-primary btn-block" %>
+        </fieldset>
+      <% end %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name), class: "btn btn-sm btn-link btn-block" %>
     </div>
   </div>
 </div>

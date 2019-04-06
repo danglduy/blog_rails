@@ -35,10 +35,14 @@
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # devise :database_authenticatable, :registerable,
+  #   :recoverable, :rememberable, :trackable, :validatable,
+  #   :confirmable, :lockable, :timeoutable
+  #   :confirmable, :lockable, :timeoutable, :omniauthable
+
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
-    :confirmable, :lockable, :timeoutable
+    :confirmable, :timeoutable
 
   has_many :active_relationships, class_name:  "Relationship",
     foreign_key: "follower_id",
@@ -73,10 +77,5 @@ class User < ApplicationRecord
       "user_id IN (#{following_ids})
       OR user_id = :user_id", user_id: id
     )
-  end
-
-  protected
-  def confirmation_required?
-    true
   end
 end
