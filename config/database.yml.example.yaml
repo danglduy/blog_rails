@@ -21,34 +21,20 @@ pg: &pg
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-sqlite3: &sqlite3
-    adapter: sqlite3
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    timeout: 5000
-
 development:
-  <<: *sqlite3
-  database: db/development.sqlite3
-
-# development:
-#   <<: *pg
-#   database: blog_dev
-#   username:
-#   password:
+  <<: *pg
+  database: blog_dev
+  username:
+  password:
 
 test:
-  <<: *sqlite3
-  database: db/test.sqlite3
-
-# test:
-#   <<: *pg
-#   database: blog_test
-#   username:
-#   password:
+  <<: *pg
+  database: blog_test
+  username:
+  password:
 
 production:
   <<: *pg
   database: blog_production
   username: sa
   password: <%= ENV['DEMO_BLOG_DATABASE_PASSWORD'] %>
-
