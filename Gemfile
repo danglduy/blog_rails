@@ -12,6 +12,7 @@ gem "config", "~> 1.7"
 gem "devise", "~> 4.2"
 gem "dotenv-rails", "~> 2.5"
 gem "faker", "~> 1.8", ">= 1.8.7"
+gem "image_processing", "~> 1.2"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
 gem "pg", ">= 0.18", "< 2.0"
@@ -25,6 +26,7 @@ gem "simplemde-rails", "~> 1.11", ">= 1.11.2"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "wdm", ">= 0.1.0" if Gem.win_platform?
+gem "webpacker"
 gem "will_paginate", "~> 3.1", ">= 3.1.6"
 
 group :production do
