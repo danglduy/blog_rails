@@ -1,10 +1,10 @@
 # README
 
-* Ruby version: 2.5.1
+* Ruby version: 2.6.2
 
 * System dependencies: production: postgresql
 
-* Configuration: Rails 5.2
+* Configuration: Rails 6
 
 * Database creation: development: rails db:create
 
