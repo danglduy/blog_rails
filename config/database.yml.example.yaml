@@ -20,18 +20,16 @@ pg: &pg
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username:
+  password:
 
 development:
   <<: *pg
   database: blog_dev
-  username:
-  password:
 
 test:
   <<: *pg
   database: blog_test
-  username:
-  password:
 
 production:
   <<: *pg
