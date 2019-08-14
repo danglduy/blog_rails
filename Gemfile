@@ -18,7 +18,6 @@ gem "rails", "~> 6.0.0.rc1"
 gem "redcarpet", "~> 3.3", ">= 3.3.4"
 gem "rouge", "~> 3.3"
 gem "rubocop", "~> 0.54.0", require: false
-gem "simplemde-rails", "~> 1.11", ">= 1.11.2"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "wdm", ">= 0.1.0" if Gem.win_platform?

@@ -10,13 +10,13 @@ require("trix")
 require("@rails/actiontext")
 require("bootstrap")
 require("expose-loader?$!jquery");
-require("expose-loader?SimpleMDE!simplemde");
+require("expose-loader?EasyMDE!easymde");
 
 // Custom javascript
 $(document).on('turbolinks:load', function() {
   let editorElement = document.getElementById('content');
   if (editorElement) {
-    let simplemde = new SimpleMDE({
+    let easymde = new EasyMDE({
       element: editorElement,
       spellChecker: false
     });

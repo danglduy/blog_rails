@@ -1691,14 +1691,14 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codemirror-spell-checker@*:
+codemirror-spell-checker@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/codemirror-spell-checker/-/codemirror-spell-checker-1.1.2.tgz#1c660f9089483ccb5113b9ba9ca19c3f4993371e"
   integrity sha1-HGYPkIlIPMtRE7m6nKGcP0mTNx4=
   dependencies:
     typo-js "*"
 
-codemirror@*:
+codemirror@^5.48.0:
   version "5.48.2"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.48.2.tgz#a9dd3d426dea4cd59efd59cd98e20a9152a30922"
   integrity sha512-i9VsmC8AfA5ji6EDIZ+aoSe4vt9FcwPLdHB1k1ItFbVyuOFRrcfvnoKqwZlC7EVA2UmTRiNEypE4Uo7YvzVY8Q==
@@ -2393,6 +2393,15 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
+
+easymde@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/easymde/-/easymde-2.7.0.tgz#42e52010b5611892d61bcaf29f595c8f40e43002"
+  integrity sha512-ir+RC4y72HuOqwy5ZCeyfMSzgh4ZBRwYT/gjuBhBzXc6tYFhFSVQD87nEpdZehvhLSa2DshZLsPAFSGxs4ZI5A==
+  dependencies:
+    codemirror "^5.48.0"
+    codemirror-spell-checker "1.1.2"
+    marked "^0.7.0"
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"
@@ -4003,7 +4012,7 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marked@*:
+marked@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
   integrity sha512-c+yYdCZJQrsRjTPhUx7VKkApw9bwDkNbHUKo1ovgcfDjb2kc8rLuRbIFyXL5WOEUwzSSKo3IXpph2K6DqB/KZg==
@@ -6188,15 +6197,6 @@ simple-swizzle@^0.2.2:
   integrity sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo=
   dependencies:
     is-arrayish "^0.3.1"
-
-simplemde@^1.11.2:
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/simplemde/-/simplemde-1.11.2.tgz#a23a35d978d2c40ef07dec008c92f070d8e080e3"
-  integrity sha1-ojo12XjSxA7wfewAjJLwcNjggOM=
-  dependencies:
-    codemirror "*"
-    codemirror-spell-checker "*"
-    marked "*"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
