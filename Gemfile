@@ -7,14 +7,15 @@ gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "bootstrap-will_paginate", "~> 1.0"
 gem "config", "~> 1.7"
-gem "devise", "~> 4.2"
+gem 'devise', git: 'https://github.com/plataformatec/devise'
+# gem "devise", "~> 4.6"
 gem "dotenv-rails", "~> 2.5"
 gem "faker", "~> 1.8", ">= 1.8.7"
 gem "image_processing", "~> 1.2"
 gem "jbuilder", "~> 2.5"
 gem "pg", ">= 0.18", "< 2.0"
 gem "pygments.rb", "~> 1.2", ">= 1.2.1"
-gem "rails", "~> 6.0.0.rc1"
+gem "rails", "~> 6.0.0"
 gem "redcarpet", "~> 3.3", ">= 3.3.4"
 gem "rouge", "~> 3.3"
 gem "rubocop", "~> 0.54.0", require: false
