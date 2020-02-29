@@ -188,7 +188,7 @@ GEM
     pg (1.1.4)
     powerpack (0.1.2)
     public_suffix (3.1.1)
-    puma (3.12.1)
+    puma (3.12.3)
     pygments.rb (1.2.1)
       multi_json (>= 1.0.0)
     rack (2.0.7)
@@ -332,7 +332,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   passenger (~> 5.3, >= 5.3.5)
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
+  puma (~> 3.12)
   pygments.rb (~> 1.2, >= 1.2.1)
   rails (~> 6.0.0)
   rails-controller-testing
