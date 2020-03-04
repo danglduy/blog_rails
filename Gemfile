@@ -32,7 +32,7 @@ end
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
-  gem "puma", "~> 3.11"
+  gem "puma", "~> 3.12"
   gem "rspec-rails", "~> 3.8"
 end
 
