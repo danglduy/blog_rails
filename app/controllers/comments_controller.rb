@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
         format.js
       end
     else
-      flash[:danger] = @comments.errors.full_messages.to_sentence
+      flash[:danger] = @comment.errors.full_messages.to_sentence
       redirect_back(fallback_location: root_path)
     end
   end
