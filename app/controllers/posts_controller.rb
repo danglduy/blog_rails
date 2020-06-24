@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: %i(new create edit update destroy)
-  before_action :find_post, only: %i(show edit update destroy)
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :find_post, only: %i[show edit update destroy]
 
   def index
     @posts = Post.paginate page: params[:page], per_page: 10
@@ -18,7 +20,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build post_params
     if @post.save
-      flash[:success] = "Post created!"
+      flash[:success] = 'Post created!'
       redirect_to user_path(current_user)
     else
       flash[:danger] = @post.errors.full_messages.to_sentence
@@ -26,12 +28,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @post.update post_params
-      flash[:success] = "Post updated"
+      flash[:success] = 'Post updated'
     else
       flash[:danger] = @post.errors.full_messages.to_sentence
     end
@@ -42,20 +43,22 @@ class PostsController < ApplicationController
     @post.destroy
     respond_to do |format|
       format.html do
-        flash[:success] = "Post deleted"
+        flash[:success] = 'Post deleted'
         redirect_back fallback_location: root_path
       end
       format.js do
-        render file: "posts/destroy.js.erb"
+        render file: 'posts/destroy.js.erb'
       end
     end
   end
 
   private
+
   def find_post
     @post = Post.find_by id: params[:id]
     return if @post
-    redirect_to root_url, flash: {danger: "Post not found"}
+
+    redirect_to root_url, flash: { danger: 'Post not found' }
   end
 
   def post_params

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -14,7 +16,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
@@ -30,19 +32,18 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
-
   # Set action mailer default_url
-  config.action_mailer.default_url_options = {host: "localhost", port: 3000}
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['email_address'],
-    port:                 ENV['email_port'],
-    domain:               ENV['email_domain'],
-    user_name:            ENV['email_username'],
-    password:             ENV['email_password'],
-    authentication:       'plain',
+    address: ENV['email_address'],
+    port: ENV['email_port'],
+    domain: ENV['email_domain'],
+    user_name: ENV['email_username'],
+    password: ENV['email_password'],
+    authentication: 'plain',
     enable_starttls_auto: true
   }
 

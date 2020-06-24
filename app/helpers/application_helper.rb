@@ -1,22 +1,25 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
-  require "redcarpet"
-  require "rouge"
-  require "rouge/plugins/redcarpet"
+  require 'redcarpet'
+  require 'rouge'
+  require 'rouge/plugins/redcarpet'
 
   class HTMLwithPygments < Redcarpet::Render::HTML
     include Rouge::Plugins::Redcarpet
   end
 
-  def full_title page_title = ""
-    base_title = "Awesome Blog"
+  def full_title(page_title = '')
+    base_title = 'Awesome Blog'
     if page_title.empty?
       base_title
     else
-      page_title + " | " + base_title
+      page_title + ' | ' + base_title
     end
   end
 
-  def markdown content
+  # rubocop:disable Rails/OutputSafety
+  def markdown(content)
     renderer = HTMLwithPygments.new(
       hard_wrap: true, filter_html: true
     )
@@ -35,14 +38,15 @@ module ApplicationHelper
       emoji: true
     }
 
-    @markdown ||= Redcarpet::Markdown.new(renderer, options).render(content).html_safe
+    Redcarpet::Markdown.new(renderer, options).render(content).html_safe
   end
+  # rubocop:enable Rails/OutputSafety
 
-  def current_user? user
+  def current_user?(user)
     user == current_user
   end
 
-  def redirect_back_or default
+  def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end

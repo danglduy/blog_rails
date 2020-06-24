@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: :destroy
@@ -10,7 +12,7 @@ class CommentsController < ApplicationController
     if @comment.save
       respond_to do |format|
         format.html do
-          flash[:success] = "Your comment was successfully posted!"
+          flash[:success] = 'Your comment was successfully posted!'
           redirect_back(fallback_location: root_path)
         end
         format.js
@@ -25,7 +27,7 @@ class CommentsController < ApplicationController
     @comment.destroy
     respond_to do |format|
       format.html do
-        flash[:success] = "Comment deleted"
+        flash[:success] = 'Comment deleted'
         redirect_back fallback_location: root_path
       end
       format.js
@@ -33,12 +35,14 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def correct_user
     @comment = Comment.find_by id: params[:id]
     @commentuser = @comment.user
     @postuser = @comment.commentable.user
     return if (current_user != (@commentuser || @postuser)) ||
-      !current_user.admin?
+              !current_user.admin?
+
     redirect_to root_url
   end
 
@@ -58,7 +62,8 @@ class CommentsController < ApplicationController
   def find_comment
     @comment = Comment.find_by(id: params[:id])
     return if @comment
-    redirect_to root_url, flash: {danger: "Comment not found"}
+
+    redirect_to root_url, flash: { danger: 'Comment not found' }
   end
 
   def new_comment
@@ -67,8 +72,9 @@ class CommentsController < ApplicationController
 
   def prevent_nested_comment
     return unless (new_comment.commentable.is_a? Comment) &&
-      (new_comment.commentable.commentable.is_a? Comment)
-    flash[:danger] = "Nested comment is not permitted!"
+                  (new_comment.commentable.commentable.is_a? Comment)
+
+    flash[:danger] = 'Nested comment is not permitted!'
     redirect_back(fallback_location: root_path)
   end
 end
