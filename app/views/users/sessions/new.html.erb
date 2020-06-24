@@ -6,7 +6,7 @@
         resource,
         as: resource_name,
         url: session_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
+        <%= render "user/shared/error_messages", resource: resource %>
         <fieldset>
           <div class="form-group">
             <%= f.email_field :email,
