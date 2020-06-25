@@ -9,8 +9,8 @@ require("channels")
 require("trix")
 require("@rails/actiontext")
 require("bootstrap")
-require("expose-loader?$!jquery");
-require("expose-loader?EasyMDE!easymde");
+import $ from 'jquery';
+import EasyMDE from 'easymde';
 
 // Custom javascript
 $(document).on('turbolinks:load', function() {
