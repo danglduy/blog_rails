@@ -17,7 +17,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pygments.rb', '~> 1.2', '>= 1.2.1'
 gem 'rails', '~> 6.0.0'
-gem 'redcarpet', '~> 3.3', '>= 3.3.4'
+gem 'redcarpet', '~> 3.5'
 gem 'rouge', '~> 3.3'
 gem 'rubocop-github'
 gem 'rubocop-performance', require: false
